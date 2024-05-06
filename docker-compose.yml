@@ -1,0 +1,7 @@
+services:
+  browser:
+    build:
+      context: .
+    container_name: volumes-browser
+    environment:
+      - TZ=Europe/Berlin
