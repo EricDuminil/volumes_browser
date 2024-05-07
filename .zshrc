@@ -7,4 +7,6 @@ alias tree='exa --header --long --group --git --icons --tree'
 alias vim='nvim'
 alias v='nvim'
 alias v-='nvim -'
-export EDITOR=vim
+export EDITOR=nvim
+
+export PROMPT='volume-browser: %~ %# '
