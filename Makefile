@@ -22,7 +22,7 @@ shell: ## Start shell.
 	@echo "${green}Start shell interactive console${no_color}"
 	docker compose run --rm browser
 
-write: ## Start shell after mounting every volume
+write: ## ⚠️ Start shell after mounting every volume
 	@echo "${red}Start shell interactive console. Be careful!${no_color}"
 	@$(MAKE) --quiet MODE=rw COLOR="${red}" -- --mount
 
