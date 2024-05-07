@@ -1,7 +1,9 @@
 FROM alpine:latest
-RUN apk update && apk add vim ncdu zsh exa git
+RUN apk update && apk add neovim ncdu zsh exa git
 # Add vimrc?
 # Add gitconfig?
-COPY .alias /root/.zshrc
+COPY .zshrc /root/
+COPY .vimrc /root/.config/nvim/init.vim
+COPY .gitconfig /root/
 WORKDIR /mnt/
 CMD [ "zsh" ]

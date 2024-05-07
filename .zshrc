@@ -4,6 +4,7 @@ alias ll='exa --header --long --group --git --icons'
 alias la='exa --header --long --group --git --icons -a'
 alias tree='exa --header --long --group --git --icons --tree'
 
-alias v='vim'
-alias v-='v -'
+alias vim='nvim'
+alias v='nvim'
+alias v-='nvim -'
 export EDITOR=vim
