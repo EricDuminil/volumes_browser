@@ -19,6 +19,21 @@ shell: ## Start shell.
 	@echo "${green}Start shell interactive console${no_color}"
 	docker compose run --rm browser
 
+mount: ## Start shell after mounting every volume
+	@echo "${red}Start shell interactive console. Be careful!${no_color}"
+	docker compose run --rm browser
+
+read: ## Start shell after mounting every volume (READ-ONLY)
+	@echo "${green}Start shell interactive console with read-only volumes${no_color}"
+	@{\
+		set -e;\
+		for VOLUME_NAME in $$(docker volume ls --format "{{.Name}}"); do\
+			echo "Mount $${VOLUME_NAME} to /mnt/${VOLUME_NAME}";\
+			mount="$${mount} -v $${VOLUME_NAME}:/mnt/$${VOLUME_NAME}:ro";\
+		done;\
+		docker compose run $${mount} --rm browser;\
+	}
+
 .PHONY: help backup shell root sql logs list build update data
 
 green=`tput setaf 2`
