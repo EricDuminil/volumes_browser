@@ -1,4 +1,3 @@
-echo "HELLO"
 " Don't try to be vi compatible
 set nocompatible
 
@@ -32,6 +31,7 @@ vnoremap d "ad
 vnoremap c "ac
 
 nnoremap <leader>q :q<CR>
+
 nnoremap <leader>c "+c
 nnoremap <leader>d "+d
 nnoremap <leader>D "+D
