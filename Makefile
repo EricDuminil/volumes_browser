@@ -37,7 +37,7 @@ read: ## Start shell after mounting every volume (READ-ONLY)
 			echo "Mount ${COLOR}$${VOLUME_NAME}${no_color} to /mnt/$${VOLUME_NAME}";\
 			mount="$${mount} -v $${VOLUME_NAME}:/mnt/$${VOLUME_NAME}:${MODE}";\
 		done;\
-		docker compose run $${mount} --rm browser;\
+		docker compose run $${mount} -v /tmp/:/tmp/ --rm browser;\
 	}
 
 .PHONY: help write read build shell
