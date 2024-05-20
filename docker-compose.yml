@@ -5,3 +5,10 @@ services:
     container_name: volumes-browser
     environment:
       - TZ=Europe/Berlin
+    volumes:
+      - browser-config:/root/.local/
+
+volumes:
+  browser-config:
+    name: browser-config
+

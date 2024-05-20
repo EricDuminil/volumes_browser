@@ -10,3 +10,8 @@ alias v-='nvim -'
 export EDITOR=nvim
 
 export PROMPT='volume-browser: %~ %# '
+
+export HISTFILE=/root/.local/.zsh_history
+export SAVEHIST=10000
+export HISTSIZE=10000
+setopt HIST_IGNORE_ALL_DUPS
