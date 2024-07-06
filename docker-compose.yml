@@ -7,6 +7,7 @@ services:
       - TZ=Europe/Berlin
     volumes:
       - browser-config:/root/.local/
+      - /etc/localtime:/etc/localtime:ro
 
 volumes:
   browser-config:
