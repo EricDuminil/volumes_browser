@@ -32,7 +32,8 @@ read: ## Start shell after mounting every volume (READ-ONLY)
 
 --mount: ## Start shell after mounting every volume
 	@{\
-		set -e;\
+		set -eu;\
+		mount=""; \
 		for VOLUME_NAME in $$(docker volume ls --format "{{.Name}}" | grep ${VOLUMES}); do\
 			echo "Mount ${COLOR}$${VOLUME_NAME}${no_color} to /mnt/$${VOLUME_NAME}";\
 			mount="$${mount} -v $${VOLUME_NAME}:/mnt/$${VOLUME_NAME}:${MODE}";\
