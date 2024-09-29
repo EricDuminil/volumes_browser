@@ -94,10 +94,10 @@ fi
 mount_command=""
 
 for VOLUME_NAME in $(docker volume ls --format "{{.Name}}" | grep ${VOLUMES_PATTERN}); do
-  echo "Mount ${COLOR}${VOLUME_NAME}${no_color} to /${MOUNT_FOLDER}/${VOLUME_NAME}";
-  mount_command="${mount_command} -v ${VOLUME_NAME}:/${MOUNT_FOLDER}/${VOLUME_NAME}:${MODE}";
+  echo "Mount ${COLOR}${VOLUME_NAME}${no_color} to ${MOUNT_FOLDER}/${VOLUME_NAME}";
+  mount_command="${mount_command} -v ${VOLUME_NAME}:${MOUNT_FOLDER}/${VOLUME_NAME}:${MODE}";
 done;
 
 echo
 set -x
-docker run ${mount_command} -v /tmp/:/tmp/ --rm -it -w /${MOUNT_FOLDER}/ ${PARAMS} ${IMAGE} ${COMMAND}
+docker run ${mount_command} -v /tmp/:/tmp/ --rm -it -w ${MOUNT_FOLDER}/ ${PARAMS} ${IMAGE} ${COMMAND}
