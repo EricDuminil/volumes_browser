@@ -7,6 +7,8 @@ set -e
 #TODO: Check integrity
 # ./volumes_browser.sh --image=bytesco/ncdu --command="ncdu ." 
 #TODO: Find simple web example
+# ./volumes_browser.sh --image=copyparty/ac --command="" --params="-p 3923:3923"
+# ./volumes_browser.sh --image=svenstaro/miniserve --command="/mnt" --params="-p 8080:8080"
 
 ################################################################################
 #                             Standard parameters                              #
