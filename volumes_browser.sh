@@ -4,7 +4,9 @@ set -e
 # ./volumes_browser.sh
 # ./volumes_browser.sh --mode=rw
 # ./volumes_browser.sh --command=tree
+#TODO: Check integrity
 # ./volumes_browser.sh --image=bytesco/ncdu --command="ncdu ." 
+#TODO: Find simple web example
 
 ################################################################################
 #                             Standard parameters                              #
