@@ -70,6 +70,9 @@ while [ "$1" != "" ]; do
         --params)
             PARAMS=$VALUE
             ;;
+        --folder)
+            MOUNT_FOLDER=$VALUE
+            ;;
         *)
             echo "ERROR: unknown parameter \"$PARAM\""
             usage
