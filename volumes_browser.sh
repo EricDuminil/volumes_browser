@@ -1,6 +1,10 @@
 #! /bin/sh
 set -e
 
+# ./volumes_browser.sh
+# ./volumes_browser.sh --mode=rw
+# ./volumes_browser.sh --command=tree
+# ./volumes_browser.sh --image=bytesco/ncdu --command="ncdu ." 
 
 ################################################################################
 #                             Standard parameters                              #
@@ -25,8 +29,9 @@ usage()
     echo "\t--mode=$MODE (ro for read-only, rw for read-write)"
     echo "\t--volumes=$VOLUMES_PATTERN (grep pattern, to filter volumes to mount)"
     echo "\t--image=$IMAGE (docker image)"
-    echo "\t--command=$COMMAND (command to run)"
     echo "\t--params=$PARAMS (extra parameters)"
+    echo "\t--command=$COMMAND (command to run)"
+    echo "\t--folder=$MOUNT_FOLDER (in which folder should volumes be mounted)"
     echo ""
 }
 
@@ -96,12 +101,3 @@ done;
 echo
 set -x
 docker run ${mount} -v /tmp/:/tmp/ --rm -it -w /${MOUNT_FOLDER}/ ${PARAMS} ${IMAGE} ${COMMAND};
-#
-# TODO: Add --web?
-
-# Web example
-
-# docker run \
-#     ${mount} \
-#     -p 8080:80 \
-#     filebrowser/filebrowser
