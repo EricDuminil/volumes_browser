@@ -4,10 +4,12 @@ set -eu
 
 MODE=ro
 VOLUMES=.
+
 green=$(tput setaf 2)
 orange=$(tput setaf 9)
 red=$(tput setaf 1)
 no_color=$(tput sgr0)
+
 COLOR=$green
 mount=""
 IMAGE="busybox:latest"
