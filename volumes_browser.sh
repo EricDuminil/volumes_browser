@@ -8,6 +8,7 @@ set -e
 MODE=ro
 VOLUMES_PATTERN=.
 IMAGE="busybox:latest"
+COMMAND="sh"
 
 ################################################################################
 #                                     Info                                     #
@@ -22,6 +23,7 @@ usage()
     echo "\t--mode=$MODE (ro for read-only, rw for read-write)"
     echo "\t--volumes=$VOLUMES_PATTERN (grep pattern, to filter volumes to mount)"
     echo "\t--image=$IMAGE (docker image)"
+    echo "\t--command=$COMMAND (command to run)"
     echo ""
 }
 
@@ -54,6 +56,9 @@ while [ "$1" != "" ]; do
         --image)
             IMAGE=$VALUE
             ;;
+        --command)
+            COMMAND=$VALUE
+            ;;
         *)
             echo "ERROR: unknown parameter \"$PARAM\""
             usage
@@ -63,9 +68,6 @@ while [ "$1" != "" ]; do
     shift
 done
 
-################################################################################
-#                      Mount volumes and start container                       #
-################################################################################
 if [ "$MODE" = "rw" ]
 then
   COLOR=$red
@@ -74,6 +76,10 @@ else
   COLOR=$green
 fi
 
+################################################################################
+#                      Mount volumes and start container                       #
+################################################################################
+
 mount=""
 
 for VOLUME_NAME in $(docker volume ls --format "{{.Name}}" | grep ${VOLUMES_PATTERN}); do
@@ -81,4 +87,6 @@ for VOLUME_NAME in $(docker volume ls --format "{{.Name}}" | grep ${VOLUMES_PATT
   mount="${mount} -v ${VOLUME_NAME}:/mnt/${VOLUME_NAME}:${MODE}";
 done;
 
-docker run ${mount} -v /tmp/:/tmp/ --rm -it -w /mnt/ $IMAGE sh;
+echo
+set -x
+docker run ${mount} -v /tmp/:/tmp/ --rm -it -w /mnt/ $IMAGE $COMMAND;
