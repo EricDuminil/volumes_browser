@@ -9,6 +9,7 @@ MODE=ro
 VOLUMES_PATTERN=.
 IMAGE="busybox:latest"
 COMMAND="sh"
+PARAMS=""
 
 ################################################################################
 #                                     Info                                     #
@@ -24,6 +25,7 @@ usage()
     echo "\t--volumes=$VOLUMES_PATTERN (grep pattern, to filter volumes to mount)"
     echo "\t--image=$IMAGE (docker image)"
     echo "\t--command=$COMMAND (command to run)"
+    echo "\t--params=$PARAMS (extra parameters)"
     echo ""
 }
 
@@ -59,6 +61,9 @@ while [ "$1" != "" ]; do
         --command)
             COMMAND=$VALUE
             ;;
+        --params)
+            PARAMS=$VALUE
+            ;;
         *)
             echo "ERROR: unknown parameter \"$PARAM\""
             usage
@@ -83,18 +88,19 @@ fi
 mount=""
 
 for VOLUME_NAME in $(docker volume ls --format "{{.Name}}" | grep ${VOLUMES_PATTERN}); do
-  echo "Mount ${COLOR}${VOLUME_NAME}${no_color} to /mnt/${VOLUME_NAME}";
-  mount="${mount} -v ${VOLUME_NAME}:/mnt/${VOLUME_NAME}:${MODE}";
+  echo "Mount ${COLOR}${VOLUME_NAME}${no_color} to /srv/${VOLUME_NAME}";
+  mount="${mount} -v ${VOLUME_NAME}:/srv/${VOLUME_NAME}:${MODE}";
 done;
 
 echo
 set -x
-# docker run ${mount} -v /tmp/:/tmp/ --rm -it -w /mnt/ $IMAGE $COMMAND;
+docker run ${mount} -v /tmp/:/tmp/ --rm -it -w /mnt/ $PARAMS $IMAGE $COMMAND;
 #
 # TODO: Add --web?
 
 # Web example
-docker run ${mount} \
--p 8080:8080 \
--e DATA_DIR="/mnt" -e USERNAME=user \
--e PASSWORD=12345678 zer0tonin/mikochi:latest
+
+# docker run \
+#     ${mount} \
+#     -p 8080:80 \
+#     filebrowser/filebrowser
