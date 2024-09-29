@@ -89,4 +89,12 @@ done;
 
 echo
 set -x
-docker run ${mount} -v /tmp/:/tmp/ --rm -it -w /mnt/ $IMAGE $COMMAND;
+# docker run ${mount} -v /tmp/:/tmp/ --rm -it -w /mnt/ $IMAGE $COMMAND;
+#
+# TODO: Add --web?
+
+# Web example
+docker run ${mount} \
+-p 8080:8080 \
+-e DATA_DIR="/mnt" -e USERNAME=user \
+-e PASSWORD=12345678 zer0tonin/mikochi:latest
