@@ -9,6 +9,7 @@ MODE=ro
 VOLUMES_PATTERN=.
 IMAGE="busybox:latest"
 COMMAND="sh"
+MOUNT_FOLDER="/mnt"
 PARAMS=""
 
 ################################################################################
@@ -88,13 +89,13 @@ fi
 mount=""
 
 for VOLUME_NAME in $(docker volume ls --format "{{.Name}}" | grep ${VOLUMES_PATTERN}); do
-  echo "Mount ${COLOR}${VOLUME_NAME}${no_color} to /srv/${VOLUME_NAME}";
-  mount="${mount} -v ${VOLUME_NAME}:/srv/${VOLUME_NAME}:${MODE}";
+  echo "Mount ${COLOR}${VOLUME_NAME}${no_color} to /${MOUNT_FOLDER}/${VOLUME_NAME}";
+  mount="${mount} -v ${VOLUME_NAME}:/${MOUNT_FOLDER}/${VOLUME_NAME}:${MODE}";
 done;
 
 echo
 set -x
-docker run ${mount} -v /tmp/:/tmp/ --rm -it -w /mnt/ $PARAMS $IMAGE $COMMAND;
+docker run ${mount} -v /tmp/:/tmp/ --rm -it -w /${MOUNT_FOLDER}/ ${PARAMS} ${IMAGE} ${COMMAND};
 #
 # TODO: Add --web?
 
