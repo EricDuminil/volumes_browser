@@ -22,13 +22,13 @@ shell: ## Start shell.
 	@echo "${green}Start shell interactive console${no_color}"
 	docker compose run --rm browser
 
-write: ## ⚠️ Start shell after mounting every volume
-	@echo "${red}Start shell interactive console. Be careful!${no_color}"
-	@./volumes_browser.sh --mode=rw
-
 read: ## Start shell after mounting every volume (READ-ONLY)
 	@echo "${green}Start shell interactive console with read-only volumes${no_color}"
-	@./volumes_browser.sh
+	@./volumes_browser.sh --mode=ro --image=volumes_browser-browser --command=zsh
+
+write: ## ⚠️ Start shell after mounting every volume
+	@echo "${red}Start shell interactive console. Be careful!${no_color}"
+	@./volumes_browser.sh --mode=rw --image=volumes_browser-browser --command=zsh
 
 .PHONY: help write read build shell
 
