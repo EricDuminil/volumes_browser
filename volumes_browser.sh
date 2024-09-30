@@ -57,7 +57,10 @@ set -e
 #   ./volumes_browser.sh --volumes="^nginx"
 
 # Only mount volumes ending with "db":
-# ./volumes_browser.sh --volumes="db$"
+#   ./volumes_browser.sh --volumes="db$"
+
+# Show every file inside volumes containing "config":
+#   ./volumes_browser.sh --volumes=config --command=find
 
 ########################
 #   Read-write mode    #
@@ -66,7 +69,7 @@ set -e
 # Mount volumes in read-write mode.
 # WARNING! You are root inside the container, and could wipe out every volume easily.
 # This mode can be useful in order to change permissions inside a volume, or move files
-# from one volume to another.
+# from one volume to another. Use with caution.
 #   ./volumes_browser.sh --mode=rw
 
 ########################
@@ -75,7 +78,7 @@ set -e
 
 # It's possible to use any image (busybox is started by default).
 # You could prepare an image with a custom config, in order to edit files directly inside the container:
-#   ./volumes_browser.sh --image=custom_image_with_my_favourite_vim_and_git_config --command="zsh"
+#   ./volumes_browser.sh --image=custom_image_with_my_vim_and_git_config --command="zsh"
 
 # Or use existing images, e.g. to show disk usage of every volume with Ncdu:
 #   ./volumes_browser.sh --image=bytesco/ncdu --command="ncdu ." 
@@ -86,12 +89,13 @@ set -e
 ################################################################################
 #                             Standard parameters                              #
 ################################################################################
+
 MODE=ro
 VOLUMES_PATTERN=.
 IMAGE="busybox:latest"
 COMMAND="sh"
 MOUNT_FOLDER="/mnt"
-PARAMS=""
+EXTRA_PARAMS=""
 
 ################################################################################
 #                                     Info                                     #
@@ -106,7 +110,7 @@ usage()
     echo "\t--mode=$MODE (ro for read-only, rw for read-write)"
     echo "\t--volumes=$VOLUMES_PATTERN (grep pattern, to filter volumes to mount)"
     echo "\t--image=$IMAGE (docker image)"
-    echo "\t--params=$PARAMS (extra parameters)"
+    echo "\t--params=$EXTRA_PARAMS (extra parameters)"
     echo "\t--command=$COMMAND (command to run)"
     echo "\t--folder=$MOUNT_FOLDER (in which folder should volumes be mounted)"
     echo ""
@@ -145,7 +149,7 @@ while [ "$1" != "" ]; do
             COMMAND=$VALUE
             ;;
         --params)
-            PARAMS=$VALUE
+            EXTRA_PARAMS=$VALUE
             ;;
         --folder)
             MOUNT_FOLDER=$VALUE
@@ -180,4 +184,5 @@ done;
 
 echo
 set -x
-docker run ${mount_command} -v /tmp/:/tmp/ --rm -it -w ${MOUNT_FOLDER}/ ${PARAMS} ${IMAGE} ${COMMAND}
+docker run ${mount_command} -v /tmp/:/tmp/ --rm -it -w ${MOUNT_FOLDER}/ ${EXTRA_PARAMS} ${IMAGE} ${COMMAND}
+
