@@ -86,7 +86,7 @@ set -e
 #   ./volumes_browser.sh --image=custom_image_with_my_vim_and_git_config --command="zsh"
 
 # Or use existing images, e.g. to show disk usage of every volume with Ncdu:
-#   ./volumes_browser.sh --image=bytesco/ncdu --command="ncdu ." 
+#   ./volumes_browser.sh --image=bytesco/ncdu --command="ncdu ."
 
 # Or to display the content of the volumes inside a web-browser:
 #   ./volumes_browser.sh --image=svenstaro/miniserve --command="/mnt" --params="-p 8080:8080"
