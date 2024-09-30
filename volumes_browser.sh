@@ -86,6 +86,14 @@ set -e
 # Or to display the content of the volumes inside a web-browser:
 #   ./volumes_browser.sh --image=svenstaro/miniserve --command="/mnt" --params="-p 8080:8080"
 
+########################
+#       License        #
+########################
+
+# MIT License
+#
+# Copyright (c) 2024 Eric Duminil
+
 ################################################################################
 #                              Default parameters                              #
 ################################################################################
