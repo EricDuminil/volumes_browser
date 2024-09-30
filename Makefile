@@ -24,22 +24,11 @@ shell: ## Start shell.
 
 write: ## ⚠️ Start shell after mounting every volume
 	@echo "${red}Start shell interactive console. Be careful!${no_color}"
-	@$(MAKE) --quiet MODE=rw COLOR="${red}" -- --mount
+	@./volumes_browser.sh --mode=rw
 
 read: ## Start shell after mounting every volume (READ-ONLY)
 	@echo "${green}Start shell interactive console with read-only volumes${no_color}"
-	@$(MAKE) --quiet MODE=ro COLOR="${green}" -- --mount
-
---mount: ## Start shell after mounting every volume
-	@{\
-		set -eu;\
-		mount=""; \
-		for VOLUME_NAME in $$(docker volume ls --format "{{.Name}}" | grep ${VOLUMES}); do\
-			echo "Mount ${COLOR}$${VOLUME_NAME}${no_color} to /mnt/$${VOLUME_NAME}";\
-			mount="$${mount} -v $${VOLUME_NAME}:/mnt/$${VOLUME_NAME}:${MODE}";\
-		done;\
-		docker compose run $${mount} -v /tmp/:/tmp/ --rm browser;\
-	}
+	@./volumes_browser.sh
 
 .PHONY: help write read build shell
 
