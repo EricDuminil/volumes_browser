@@ -1,13 +1,87 @@
 #! /bin/sh
 set -e
 
-# ./volumes_browser.sh
-# ./volumes_browser.sh --mode=rw
-# ./volumes_browser.sh --command=tree
-#TODO: Check integrity
-# ./volumes_browser.sh --image=bytesco/ncdu --command="ncdu ." 
-# ./volumes_browser.sh --image=copyparty/ac --command="" --params="-p 3923:3923"
-# ./volumes_browser.sh --image=svenstaro/miniserve --command="/mnt" --params="-p 8080:8080"
+#################################################################################
+#                        ┓┏  ┓          ┳┓                                      #
+#                        ┃┃┏┓┃┓┏┏┳┓┏┓┏  ┣┫┏┓┏┓┓┏┏┏┏┓┏┓                          #
+#                        ┗┛┗┛┗┗┻┛┗┗┗ ┛  ┻┛┛ ┗┛┗┻┛┛┗ ┛                           #
+#################################################################################
+
+# Volumes Browser is a small script which automatically mounts every available
+# docker volume. It doesn't require root on the host, it mounts the volumes
+# in read-only mode by default, and it accepts a few parameters. It doesn't
+# require any agent, or anything else than a shell and docker.
+#
+# It mounts /tmp/ in read-write mode, which allows to copy files from volumes to
+# the host easily.
+
+########################
+#         Help         #
+########################
+
+# Show help:
+#   ./volumes_browser.sh --help
+#
+#       Mount docker volumes and start a container.
+
+#       ./volumes_browser.sh
+#         -h --help
+#         --mode=ro (ro for read-only, rw for read-write)
+#         --volumes=. (grep pattern, to filter volumes to mount)
+#         --image=busybox:latest (docker image)
+#         --params= (extra parameters)
+#         --command=sh (command to run)
+#         --folder=/mnt (in which folder should volumes be mounted)
+
+########################
+#     Normal mode      #
+########################
+
+# Mount every volume in read-only mode, and start busybox:
+#   ./volumes_browser.sh
+#
+# You can then browse with cd, ls -l, and copy files to the host via /tmp/
+
+########################
+#    Custom command    #
+########################
+
+# Display a tree structure of every volume:
+#   ./volumes_browser.sh --command=tree
+
+########################
+#    Filter volumes    #
+########################
+
+# Only mount volumes starting with "nginx":
+#   ./volumes_browser.sh --volumes="^nginx"
+
+# Only mount volumes ending with "db":
+# ./volumes_browser.sh --volumes="db$"
+
+########################
+#   Read-write mode    #
+########################
+
+# Mount volumes in read-write mode.
+# WARNING! You are root inside the container, and could wipe out every volume easily.
+# This mode can be useful in order to change permissions inside a volume, or move files
+# from one volume to another.
+#   ./volumes_browser.sh --mode=rw
+
+########################
+#    Custom images     #
+########################
+
+# It's possible to use any image (busybox is started by default).
+# You could prepare an image with a custom config, in order to edit files directly inside the container:
+#   ./volumes_browser.sh --image=custom_image_with_my_favourite_vim_and_git_config --command="zsh"
+
+# Or use existing images, e.g. to show disk usage of every volume with Ncdu:
+#   ./volumes_browser.sh --image=bytesco/ncdu --command="ncdu ." 
+
+# Or to display the content of the volumes inside a web-browser:
+#   ./volumes_browser.sh --image=svenstaro/miniserve --command="/mnt" --params="-p 8080:8080"
 
 ################################################################################
 #                             Standard parameters                              #
@@ -25,7 +99,7 @@ PARAMS=""
 
 usage()
 {
-    echo "Mount docker volumes."
+    echo "Mount docker volumes and start a container."
     echo ""
     echo "./volumes_browser.sh"
     echo "\t-h --help"
