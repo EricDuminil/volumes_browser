@@ -48,13 +48,6 @@ set -e
 # You can then browse with cd, ls -l, and copy files to the host via /tmp/
 
 ########################
-#    Custom command    #
-########################
-
-# Display a tree structure of every volume:
-#   ./volumes_browser.sh --command=tree
-
-########################
 #    Filter volumes    #
 ########################
 
@@ -66,6 +59,16 @@ set -e
 
 # Show every file inside volumes containing "config":
 #   ./volumes_browser.sh --volumes=config --command=find
+
+########################
+#    Custom command    #
+########################
+
+# Display a tree structure of every volume:
+#   ./volumes_browser.sh --command=tree
+
+# Tar the content of every nginx volume:
+#   ./volumes_browser.sh --volumes=nginx --command="tar cvfz /tmp/nginx.tgz -C /mnt ."
 
 ########################
 #   Read-write mode    #
