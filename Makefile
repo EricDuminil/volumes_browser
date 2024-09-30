@@ -47,6 +47,3 @@ green=`tput setaf 2`
 orange=`tput setaf 9`
 red=`tput setaf 1`
 no_color=`tput sgr0`
-
-include .env
-export COMPOSE_PROFILES
