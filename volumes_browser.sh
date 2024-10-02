@@ -121,6 +121,8 @@ usage()
 {
     echo "${green}Mount docker volumes and start a container.${no_color}"
     echo ""
+    echo "${gray}# Syntax:${no_color}"
+    echo ""
     echo "./volumes_browser.sh"
     echo "\t-h --help"
     echo "\t--mode=$MODE (ro for read-only, rw for read-write)"
@@ -130,6 +132,19 @@ usage()
     echo "\t--command=\"$COMMAND\" (command to run)"
     echo "\t--folder=$MOUNT_FOLDER (in which folder should volumes be mounted)"
     echo ""
+    echo "${gray}# Examples:${no_color}"
+    echo ""
+    echo "${gray}## Show tree structure of every volume:${no_color}"
+    echo "./volumes_browser.sh --command=tree"
+    echo ""
+    echo "${gray}## Show disk usage of every volume:${no_color}"
+    echo "./volumes_browser.sh --image=bytesco/ncdu --command=\"ncdu .\""
+    echo ""
+    echo "${gray}## Mount volumes in read-write mode (DANGER!):${no_color}"
+    echo "./volumes_browser.sh --mode=rw"
+    echo ""
+    echo "${gray}## Show volumes inside a web-browser:${no_color}"
+    echo "./volumes_browser.sh --image=svenstaro/miniserve --command="/mnt" --params=\"-p 8080:8080\""
 }
 
 ################################################################################
@@ -137,6 +152,7 @@ usage()
 ################################################################################
 
 green=$(tput setaf 2)
+gray=$(tput setaf 10)
 orange=$(tput setaf 9)
 red=$(tput setaf 1)
 no_color=$(tput sgr0)
