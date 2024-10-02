@@ -119,7 +119,7 @@ EXTRA_PARAMS=""
 
 usage()
 {
-    echo "Mount docker volumes and start a container."
+    echo "${green}Mount docker volumes and start a container.${no_color}"
     echo ""
     echo "./volumes_browser.sh"
     echo "\t-h --help"
