@@ -16,10 +16,6 @@ The script is based on this sh/bash one-liner:
 ## Syntax
 
 ```
-Mount docker volumes and start a container.
-
-# Syntax:
-
 ./volumes_browser.sh
 	-h --help
 	--mode=ro (ro for read-only, rw for read-write)
@@ -28,18 +24,18 @@ Mount docker volumes and start a container.
 	--params="" (extra parameters)
 	--command="sh" (command to run)
 	--folder=/mnt (in which folder should volumes be mounted)
-
-# Examples:
-
-## Show tree structure of every volume:
-./volumes_browser.sh --command=tree
-
-## Show disk usage of every volume:
-./volumes_browser.sh --image=bytesco/ncdu --command="ncdu ."
-
-## Mount volumes in read-write mode (DANGER!):
-./volumes_browser.sh --mode=rw
-
-## Show volumes inside a web-browser:
-./volumes_browser.sh --image=svenstaro/miniserve --command=/mnt --params="-p 8080:8080"
 ```
+
+## Examples
+
+### Show tree structure of every volume:
+`./volumes_browser.sh --command=tree`
+
+### Show disk usage of every volume:
+`./volumes_browser.sh --image=bytesco/ncdu --command="ncdu ."`
+
+### Mount volumes in read-write mode (DANGER!):
+`./volumes_browser.sh --mode=rw`
+
+### Show volumes inside a web-browser:
+`./volumes_browser.sh --image=svenstaro/miniserve --command=/mnt --params="-p 8080:8080"`
