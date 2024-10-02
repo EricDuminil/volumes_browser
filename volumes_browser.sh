@@ -124,10 +124,10 @@ usage()
     echo "./volumes_browser.sh"
     echo "\t-h --help"
     echo "\t--mode=$MODE (ro for read-only, rw for read-write)"
-    echo "\t--volumes=$VOLUMES_PATTERN (grep pattern, to filter volumes to mount)"
+    echo "\t--volumes=$VOLUMES_PATTERN (grep pattern, to filter volume names)"
     echo "\t--image=$IMAGE (docker image)"
-    echo "\t--params=$EXTRA_PARAMS (extra parameters)"
-    echo "\t--command=$COMMAND (command to run)"
+    echo "\t--params=\"$EXTRA_PARAMS\" (extra parameters)"
+    echo "\t--command=\"$COMMAND\" (command to run)"
     echo "\t--folder=$MOUNT_FOLDER (in which folder should volumes be mounted)"
     echo ""
 }
