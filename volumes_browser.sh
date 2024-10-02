@@ -107,6 +107,8 @@ set -e
 # MIT License
 #
 # Copyright (c) 2024 Eric Duminil
+#
+# https://github.com/EricDuminil/volumes_browser
 
 ################################################################################
 #                              Default parameters                              #
