@@ -11,9 +11,7 @@ docker volume.
 
 The script is based on this sh/bash one-liner:
 
-```
-mount_command=""; for VOLUME_NAME in $(docker volume ls --format "{{.Name}}"); do mount_command="${mount_command} -v ${VOLUME_NAME}:/mnt/${VOLUME_NAME}:ro"; done; docker run ${mount_command} -v /tmp/:/tmp/ --rm -it -w /mnt/ busybox:latest sh
-```
+> ```mount_command=""; for VOLUME_NAME in $(docker volume ls --format "{{.Name}}"); do mount_command="${mount_command} -v ${VOLUME_NAME}:/mnt/${VOLUME_NAME}:ro"; done; docker run ${mount_command} -v /tmp/:/tmp/ --rm -it -w /mnt/ busybox:latest sh```
 
 ## Syntax
 
