@@ -31,11 +31,11 @@ The script is based on this sh/bash one-liner:
 ### Show tree structure of every volume:
 `./volumes_browser.sh --command=tree`
 
-### Show disk usage of every volume:
+### Show disk usage of every volume with [Ncdu](https://dev.yorhel.nl/ncdu):
 `./volumes_browser.sh --image=bytesco/ncdu --command="ncdu ."`
 
 ### Mount volumes in read-write mode (DANGER!):
 `./volumes_browser.sh --mode=rw`
 
-### Show volumes inside a web-browser:
+### Show volumes inside a web-browser with [miniserve](https://github.com/svenstaro/miniserve):
 `./volumes_browser.sh --image=svenstaro/miniserve --command=/mnt --params="-p 8080:8080"`
