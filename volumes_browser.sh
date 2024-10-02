@@ -77,8 +77,14 @@ set -e
 # Mount volumes in read-write mode.
 # WARNING! You are root inside the container, and could wipe out every volume easily.
 # This mode can be useful in order to change permissions inside a volume, or move files
-# from one volume to another. Use with caution.
+# from one volume to another. vi is available in busybox in order to edit files.
+# Use with caution!
+#
 #   ./volumes_browser.sh --mode=rw
+#
+# It can be a good idea to mount only the required volumes:
+#
+#   ./volumes_browser.sh --mode=rw --volumes="jellyfin"
 
 ########################
 #    Custom images     #
