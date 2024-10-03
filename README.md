@@ -65,6 +65,8 @@ You can then browse the volumes with `cd`, `ls -l`, `cat`, and copy files to the
 >     │   ├── resources
 >     │   │   ├── 0592d3c59f36410b844a95cb9e1ba453.pdf
 >     │   │   ├── 0be515ddd0a14ccba946fbe16532d0b8.pdf
+>     ...
+
 
 ### Show disk usage of every volume with [Ncdu](https://dev.yorhel.nl/ncdu):
 
