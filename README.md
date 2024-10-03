@@ -2,8 +2,7 @@
 
 [Docker documentation](https://docs.docker.com/engine/storage/) mentions that "Volumes are the best way to persist data in Docker", but it doesn't make it clear how to easily work with them.
 
-Volumes Browser is a small script which automatically mounts every available
-docker volume.
+Volumes Browser is a small script which automatically mounts every available docker volume.
 
 * It doesn't require root on the host.
 * It mounts the volumes in read-only mode by default.
