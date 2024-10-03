@@ -45,7 +45,7 @@ set -e
 # Mount every volume in read-only mode, and start busybox:
 #   ./volumes_browser.sh
 #
-# You can then browse with cd, ls -l, and copy files to the host via /tmp/
+# You can then browse with cd, ls -l, cat, and copy files to the host via /tmp/
 
 ########################
 #    Filter volumes    #
@@ -78,7 +78,7 @@ set -e
 # WARNING! You are root inside the container, and could wipe out every volume easily.
 # This mode can be useful in order to change permissions inside a volume, or move files
 # from one volume to another. vi is available in busybox in order to edit files.
-# Use with caution!
+# Use rw with caution!
 #
 #   ./volumes_browser.sh --mode=rw
 #
