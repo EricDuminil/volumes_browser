@@ -31,6 +31,12 @@ It can help you find large files inside volumes, move files from one volume to a
 
 ## Examples
 
+### Most basic
+
+`./volumes_browser.sh`
+
+You can then browse the volumes with `cd`, `ls -l`, `cat`, and copy files to the host via `/tmp/`.
+
 ### Show tree structure of every volume:
 
 `./volumes_browser.sh --command=tree`
